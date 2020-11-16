@@ -1,13 +1,14 @@
-namespace FSharpPractice
+namespace FSharpPractice.Lib
+
+open FSharp.Data
+
+// type provider generates the different types by the input JSON text
+type PersonInfo = JsonProvider<"""{ "name":"Winne", "age": 67 }""">
+type PersonInfos = JsonProvider<"""[{ "name":"Mr.Shithole", "age": 67 }]""">
 
 module JsonWithProvider =
 
-    open FSharp.Data
     open Microsoft.VisualStudio.TestTools.UnitTesting
-
-    // type provider generates the different types by the input JSON text
-    type PersonInfo = JsonProvider<"""{ "name":"Winne", "age": 67 }""">
-    type PersonInfos = JsonProvider<"""[{ "name":"Mr.Shithole", "age": 67 }]""">
 
     [<TestClass>]
     type Test() =

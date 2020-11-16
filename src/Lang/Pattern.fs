@@ -1,4 +1,4 @@
-namespace FSharpPractice
+namespace FSharpPractice.Lang
 
 module Pattern =
 
@@ -57,7 +57,8 @@ module Pattern =
 
         [<TestMethod>]
         [<DynamicData("Data", DynamicDataSourceType.Property)>]
-        // DynamicDataSource類型需要為 IEnumerable<obj []>，將待測試方法的參數放在 obj [] 中
+        // the type of DynamicDataSource should be "IEnumerable<obj []>"，
+        // place the method arguements in "obj []"
         member _.TestPattern1(p: Point) = printPoint p |> ignore
 
         static member Data =
@@ -69,7 +70,8 @@ module Pattern =
                 Point(2, -1)
                 Point()
             }
-            |> Seq.map (fun v -> [| v :> obj |]) // seq 類型實現了IEnumerable接口
+            // the type "seq" has impelemented the interface "IEnumerable"
+            |> Seq.map (fun v -> [| v :> obj |])
 
         [<TestMethod>]
         [<DataRow(10, 10)>]
