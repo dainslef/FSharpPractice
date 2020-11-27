@@ -1,4 +1,4 @@
-namespace FSharpPractice.Lib
+module FSharpPractice.Lib.JsonWithProvider
 
 open FSharp.Data
 
@@ -6,26 +6,23 @@ open FSharp.Data
 type PersonInfo = JsonProvider<"""{ "name":"Winne", "age": 67 }""">
 type PersonInfos = JsonProvider<"""[{ "name":"Mr.Shithole", "age": 67 }]""">
 
-module JsonWithProvider =
+open Microsoft.VisualStudio.TestTools.UnitTesting
 
-    open Microsoft.VisualStudio.TestTools.UnitTesting
+[<TestClass>]
+type Test() =
 
-    [<TestClass>]
-    type Test() =
+    [<TestMethod>]
+    member _.TestJsonProvider() =
+        let personInfo =
+            PersonInfo.Parse """{ "name": "Xitele", "age": 67, "sex": "unknown" }"""
 
-        [<TestMethod>]
-        member _.TestJsonProvider() =
-            let personInfo =
-                PersonInfo.Parse """{ "name": "Xitele", "age": 67, "sex": "unknown" }"""
+        let personInfos =
+            PersonInfos.Parse """[{ "name": "the Emperor QingFeng", "age": 67 }, { "name":"King Gesar", "age": 67 }]"""
 
-            let personInfos =
-                PersonInfos.Parse
-                    """[{ "name": "the Emperor QingFeng", "age": 67 }, { "name":"King Gesar", "age": 67 }]"""
+        // the generated type has the auto-generate field to represent the json schema
+        printfn "%A" personInfo
+        printfn "Name: %s, Age: %d" personInfo.Name personInfo.Age
 
-            // the generated type has the auto-generate field to represent the json schema
-            printfn "%A" personInfo
-            printfn "Name: %s, Age: %d" personInfo.Name personInfo.Age
-
-            printfn "%A" personInfos
-            for (i, info) in personInfos |> Array.indexed do
-                printfn "[%d] Name: %s, Age: %d" i info.Name info.Age
+        printfn "%A" personInfos
+        for (i, info) in personInfos |> Array.indexed do
+            printfn "[%d] Name: %s, Age: %d" i info.Name info.Age

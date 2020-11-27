@@ -1,10 +1,20 @@
-namespace FSharpPractice.Lang
+namespace rec FSharpPractice.Lang
+
+// In a recursive declaration group, 'open' declarations must come first in each moduleF# Compiler(3200)
+open System.Runtime.InteropServices
+
+// Recursive Type, need "namespace rec"
+type A =
+    | A of A
+    | B of B
+
+type B =
+    | A of A
+    | B of B
 
 // Inerface
 type IPrint =
     abstract Print: string option -> unit
-
-open System.Runtime.InteropServices
 
 // Class
 type Print([<Optional; DefaultParameterValue(1)>] x: int, ?y: float) =
@@ -33,13 +43,14 @@ type Print([<Optional; DefaultParameterValue(1)>] x: int, ?y: float) =
 
     static member Show s = printfn "Show text: %s" s
 
+// Local level module
 module Interface =
+
+    open Microsoft.VisualStudio.TestTools.UnitTesting
 
     let iPrint (p: IPrint) s =
         p.Print(None)
         Print.Show s
-
-    open Microsoft.VisualStudio.TestTools.UnitTesting
 
     [<TestClass>]
     type Test() =
