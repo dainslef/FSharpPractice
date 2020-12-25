@@ -30,11 +30,11 @@ let (|ParameterizedPattern|_|) ((x: int, y: int) as v) (p: Point) =
 // use the custom patterns
 let printPoint (p: Point) =
     match p with
-    | ParameterizedPattern (10, 10) p -> printfn "ParameterizedPattern: Value: %A" p
-    | PartialPattern1 (x, y) -> printfn "PartialPattern1: X: %d, Y: %d" x y
-    | PartialPattern2 message -> printfn "PartialPattern2: Message: %s" message
+    | ParameterizedPattern (10, 10) p -> printfn $"ParameterizedPattern: Value: {p}"
+    | PartialPattern1 (x, y) -> printfn $"PartialPattern1: X: {x}, Y: {y}"
+    | PartialPattern2 message -> printfn $"PartialPattern2: Message: {message}"
     | Pattern1 v
-    | Pattern2 v -> printfn "Pattern1|Patterns2: Value: %d" v
+    | Pattern2 v -> printfn $"Pattern1|Patterns2: Value: {v}"
     | Pattern3 -> printfn "Pattern3"
 
 open Microsoft.VisualStudio.TestTools.UnitTesting

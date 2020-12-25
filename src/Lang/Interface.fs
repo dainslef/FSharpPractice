@@ -41,7 +41,7 @@ type Print([<Optional; DefaultParameterValue(1)>] x: int, ?y: float) =
                 x
             <| Option.defaultValue 1.0 y
 
-    static member Show s = printfn "Show text: %s" s
+    static member Show s = printfn $"Show text: {s}"
 
 // Local level module
 module Interface =
@@ -63,4 +63,4 @@ module Interface =
             (p :> IPrint).Print <| Some("Type Up Cast ...")
 
         [<TestMethod>]
-        member _.TestProperty() = printfn "Point X: %d Y: %f" p.X p.Y
+        member _.TestProperty() = printfn $"Point X: {p.X} Y: {p.Y}"

@@ -20,9 +20,9 @@ type Test() =
             PersonInfos.Parse """[{ "name": "the Emperor QingFeng", "age": 67 }, { "name":"King Gesar", "age": 67 }]"""
 
         // the generated type has the auto-generate field to represent the json schema
-        printfn "%A" personInfo
-        printfn "Name: %s, Age: %d" personInfo.Name personInfo.Age
+        printfn $"{personInfo}"
+        printfn $"Name: {personInfo.Name}, Age: {personInfo.Age}"
+        printfn $"%A{personInfos}"
 
-        printfn "%A" personInfos
         for (i, info) in personInfos |> Array.indexed do
-            printfn "[%d] Name: %s, Age: %d" i info.Name info.Age
+            printfn $"[{i}] Name: {info.Name}, Age: {info.Age}"

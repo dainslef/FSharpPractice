@@ -28,4 +28,4 @@ type Test() =
                   Point = { X = 1; Y = 2; Lengths = [ 1; 2; 3 ] } }
 
         printfn <| Printf.TextWriterFormat<_> jsonText
-        printfn "%A" <| deserializeJson jsonText
+        printfn $"{deserializeJson jsonText}"
